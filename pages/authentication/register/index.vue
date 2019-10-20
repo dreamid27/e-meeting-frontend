@@ -43,7 +43,7 @@
 import Logo from "~/components/Logo.vue";
 import AuthService from '~/service/authentication';
 export default {
-  middleware: 'guest',
+  middleware: 'isGuestMiddleware',
   components: {
     Logo
   },
