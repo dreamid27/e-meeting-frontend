@@ -29,15 +29,6 @@ export default {
     Logo
   },
   beforeMount() {
-    console.log(this.$auth.loggedIn, 'loggedIN')
-    // let dashboardService = new DashboardService(this.$axios)
-    // dashboardService.getDashboard().then(x => console.log(x))
-    // .catch(res => {
-    //   let response = res.response;
-    //   if (response.status === 401) {
-    //     this.$router.push({path: '/authentication/login'})
-    //   }
-    // })
   }
 };
 </script>

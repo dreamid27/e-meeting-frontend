@@ -75,9 +75,9 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: {url: 'http://local.bridestory.com:3333/auth/login', method: 'post', propertyName: 'token' },
+          login: {url: process.env.BACKEND_BASE_URL + 'auth/login', method: 'post', propertyName: 'token' },
           logout: false,
-          user: {url: 'http://local.bridestory.com:3333/auth/user', method: 'get', propertyName: false},
+          user: {url: process.env.BACKEND_BASE_URL + 'auth/user', method: 'get', propertyName: false},
         },
         tokenRequired: true,
         tokenType: false
@@ -88,8 +88,5 @@ export default {
       logout: '/authentication/login',
       user: '/profile'
     },
-  },
-  router: {
-    middleware: ['auth']
-  },
+  }
 }

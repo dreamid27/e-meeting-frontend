@@ -15,7 +15,7 @@
             </div>
             <div class="row">
               <div class="col mt-4">
-                <input type="text" class="form-control" placeholder="Email" v-model="user.username" />
+                <input type="text" class="form-control" placeholder="Email atau Username" v-model="user.userID" />
               </div>
             </div>
             <div class="row mt-4">
@@ -51,7 +51,7 @@ export default  {
   data() {
     return {
       user: {
-        username: "",
+        userID: "",
         password: ""
       },
       errors: [],
@@ -60,34 +60,21 @@ export default  {
   },
   methods: {
     onLogin: function(e) {
-        // this.authService.postLogin(this.user).then(res => {
-        //     console.log()
-        //     localStorage.setItem("authID", res.data);
-        //     this.$router.push({path: '/'})
-        // }).catch(res => {
-        //     let response = res.response;
-        //     if(response.status === 400) {
-        //         console.error(response.data)
-        //     }
-        // })
         this.fetchLogin()
         e.preventDefault();
     },
     async fetchLogin() {
       try {
-        //this.$toast.show("Logging in...", { icon: "fingerprint" });
         await this.$auth
           .loginWith("local", {
             data: this.user
           })
           .catch(e => {
             console.error('error', e)
-            // this.$toast.error("Failed Logging In", { icon: "error_outline" });
           });
-          console.log(this.$auth.loggedIn, 'loggedIn')
+
         if (this.$auth.loggedIn) {
           this.$router.push({path: '/'})
-          //this.$toast.success('Successfully Logged In', {icon: "done"});
         }
       } catch (e) {
         console.error('error', e)
