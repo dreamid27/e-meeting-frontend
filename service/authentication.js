@@ -1,3 +1,5 @@
+
+let env = process.env;
 export default class AuthenticationService {
     constructor($axios) {
         this.$axios = $axios
@@ -5,7 +7,7 @@ export default class AuthenticationService {
 
     postLogin(userModel) {
         return this.$axios.request({ 
-            'url': process.env.BACKEND_BASE_URL + 'auth/login',
+            'url': env.BACKEND_BASE_URL + 'auth/login',
             'data': userModel,
             'method': 'POST',
             'headers': {
@@ -16,7 +18,7 @@ export default class AuthenticationService {
 
     postRegister(userModel) {
         return this.$axios.request({ 
-            'url': process.env.BACKEND_BASE_URL + 'auth/register',
+            'url': env.BACKEND_BASE_URL + 'auth/register',
             'data': userModel,
             'method': 'POST',
             'headers': {
