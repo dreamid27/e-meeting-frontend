@@ -3,6 +3,9 @@ require('dotenv').config()
 
 export default {
   mode: 'universal',
+  env: {
+    BACKEND_BASE_URL: process.env.BACKEND_BASE_URL || 'http://localhost:3000'
+  },
   /*
   ** Headers of the page
   */
