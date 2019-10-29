@@ -1,5 +1,6 @@
 <template>
   <section class="fdb-block">
+    <Loading v-if="isLoading" />
     <div
       class="container py-5 my-5"
       style="background-image: url(https://img.pngio.com/shape-png-free-download-free-shapes-png-493_315.png);"
@@ -14,7 +15,12 @@
               </div>
             </div>
             <div class="row">
-              <div class="col mt-4">
+              <div class="col">
+                <b-alert :show="messageError != ''" variant="danger">{{ messageError }}</b-alert>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
                 <input type="text" class="form-control" placeholder="Email atau Username" v-model="user.userID" />
               </div>
             </div>
@@ -25,6 +31,7 @@
                   class="form-control"
                   placeholder="Password"
                   v-model="user.password"
+                  required
                 />
               </div>
             </div>
@@ -43,10 +50,13 @@
 <script>
 import Logo from "~/components/Logo.vue";
 import AuthService from "~/service/authentication";
+import Loading from "~/components/Loading";
+
 export default  {
   middleware: 'isGuestMiddleware',
   components: {
-    Logo
+    Logo,
+    Loading
   },
   data() {
     return {
@@ -55,30 +65,35 @@ export default  {
         password: ""
       },
       errors: [],
-      authService: null
+      authService: null,
+      isLoading: false,
+      messageError: ''
     };
   },
   methods: {
     onLogin: function(e) {
+      if (!this.isLoading) {
+        this.isLoading = true;
+        this.messageError = '';
         this.fetchLogin()
-        e.preventDefault();
+      }
+      e.preventDefault();
     },
     async fetchLogin() {
       try {
-        await this.$auth
-          .loginWith("local", {
-            data: this.user
-          })
-          .catch(e => {
-            console.error('error', e)
-          });
-
+        await this.$auth.loginWith("local", {data: this.user})
         if (this.$auth.loggedIn) {
-          this.$router.push({path: '/'})
+          setTimeout(() => {
+            this.$router.push({path: '/'})
+          }, 3000);
         }
+        this.isLoading = false;
       } catch (e) {
+        this.messageError = e.response.data
+        this.isLoading = false;
         console.error('error', e)
       }
+
     }
   },
   beforeMount() {

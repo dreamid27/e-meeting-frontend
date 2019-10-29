@@ -36,6 +36,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    {src: '~/plugins/Vuelidate'}
   ],
   /*
   ** Nuxt.js dev-modules
