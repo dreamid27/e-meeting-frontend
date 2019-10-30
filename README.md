@@ -7,7 +7,7 @@
 
 
 ``` bash
-# duplicate .env.prod and rename .env.prod to .env
+$ duplicate .env.prod and rename .env.prod to .env
 
 # install dependencies
 $ npm run install
