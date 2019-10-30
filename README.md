@@ -4,6 +4,8 @@
 
 ## Build Setup
 
+$ duplicate .env.prod and rename .env.prod to .env
+
 ``` bash
 # install dependencies
 $ npm run install
