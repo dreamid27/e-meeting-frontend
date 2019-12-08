@@ -1,41 +1,101 @@
 <template>
-<header>
-  <div class="container">
-    <nav class="navbar navbar-expand-lg">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav5" aria-controls="navbarNav5" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarNav5">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <nuxtLink to="/" class="nav-link">Home </nuxtLink>
-          </li>
-        </ul>
-
-
-        <ul class="navbar-nav justify-content-end ml-auto" v-if="!$auth.loggedIn">
-          <li class="nav-item">
-            <nuxtLink to="/authentication/login" class="nav-link">Log In</nuxtLink>
-          </li>
-        </ul>
-
-        <nuxt-link class="btn btn-primary ml-md-3" to="/authentication/register" v-if="!$auth.loggedIn">Register</nuxt-link>
-        <nuxt-link class="btn btn-primary ml-md-3" to="/authentication/dashboard" v-if="$auth.loggedIn">Dashboard</nuxt-link>
-        <button type="button" @click="$auth.logout()" class="btn ml-md-3" v-if="$auth.loggedIn">Logout</button>
+  <header>
+    <div id="kt_header_mobile" class="kt-header-mobile kt-header-mobile--fixed">
+      <div class="kt-header-mobile__logo">
+        <a href="demo4/index.html">
+          <img alt="Logo" src="~assets/media/logos/logo-4-sm.png" />
+        </a>
       </div>
-    </nav>
-  </div>
-</header>
+      <div class="kt-header-mobile__toolbar">
+        <button class="kt-header-mobile__toolbar-toggler" id="kt_header_mobile_toggler">
+          <span></span>
+        </button>
+        <button
+          class="kt-header-mobile__toolbar-topbar-toggler"
+          id="kt_header_mobile_topbar_toggler"
+        >
+          <i class="flaticon-more-1"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="kt-grid kt-grid--hor kt-grid--root">
+      <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+        <div
+          class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper"
+          id="kt_wrapper"
+        >
+          <!-- begin:: Header -->
+          <div id="kt_header" class="kt-header kt-header--fixed" data-ktheader-minimize="on">
+            <div class="kt-container">
+              <!-- begin:: Brand -->
+              <div class="kt-header__brand kt-grid__item" id="kt_header_brand">
+                <a class="kt-header__brand-logo" href="demo4/index.html">
+                  <img
+                    alt="Logo"
+                    src="~assets/media/logos/logo-4.png"
+                    class="kt-header__brand-logo-default"
+                  />
+                  <img
+                    alt="Logo"
+                    src="~assets/media/logos/logo-4-sm.png"
+                    class="kt-header__brand-logo-sticky"
+                  />
+                </a>
+              </div>
+              <!-- end:: Brand -->
+              <!-- begin: Header Menu -->
+              <button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn">
+                <i class="la la-close"></i>
+              </button>
+              <!-- end: Header Menu -->
+              <mw-mainmenu />
+                <!-- begin:: Header Topbar -->
+                <div class="kt-header__topbar kt-grid__item">
+                    <mw-notification :isActiveMenu="selectedMenu" @onSelectedMenu="setActiveMenu" @onHideMenu="hideAllActiveMenu" />
+                    <mw-usermenu :isActiveMenu="selectedMenu" @onSelectedMenu="setActiveMenu" @onHideMenu="hideAllActiveMenu" />
+                </div>
+                <!-- end:: Header Topbar -->
+              
+            </div>
+          </div>
+          <!-- end:: Header -->
+        </div>
+      </div>
+    </div>
+  </header>
 </template>
 
-<style lang="scss" scoped src="./index.scss" />
+<script>
+
+import { mixin as clickaway } from 'vue-clickaway';
+import Notification from '~/components/Layout/Notification';
+import UserMenu from '~/components/Layout/UserMenu';
+import MainMenu from '~/components/Layout/MainMenu';
 
 
-.header {
-    position: fixed;
-    top: 0;
-    background: red;
-    width: 100%;
-    height: 40px;
+export default {
+    mixins: [ clickaway ],
+    data() {
+        return {
+            selectedMenu: ''
+        };
+    },
+    components: {
+        'mw-notification': Notification,
+        'mw-usermenu': UserMenu,
+        'mw-mainmenu': MainMenu
+    },
+    methods: {
+        hideAllActiveMenu() {
+            this.selectedMenu = ''
+        },
+        setActiveMenu(menuName) {
+            this.selectedMenu = menuName;
+        }
+    }
 }
+
+</script>
+
+<style lang="scss" scoped src="./index.scss" />

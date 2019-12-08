@@ -1,9 +1,6 @@
 <template>
-  <div>
-    <SideMenu />
-    <Header />
+  <div class="wrapper">
     <nuxt />
-    <!-- <Footer ></Footer> -->
   </div>
 </template>
 

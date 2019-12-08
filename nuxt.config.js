@@ -28,9 +28,7 @@ export default {
   ** Global CSS
   */
   css: [
-    {src: "~/assets/scss/main.scss", lang: 'sass'},
-    {src: "~/assets/scss/froala.min.scss", lang: 'sass'},
-
+    {src: "~/assets/scss/main.scss", lang: 'sass'}
   ],
   /*
   ** Plugins to load before mounting the App
