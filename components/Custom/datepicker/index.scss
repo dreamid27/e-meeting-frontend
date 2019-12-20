@@ -1,0 +1,16 @@
+@import '~vue2-datepicker/scss/index.scss';
+
+.mx-datepicker {
+    width: 100%;
+
+    .mx-input-wrapper {
+        .mx-input {
+            height: calc(1.5em + 1.3rem + 2px);
+            font-size: 1rem;
+            border: 1px solid #e2e5ec;
+            color: #495057;
+            padding: 0.65rem 1rem;
+            box-shadow: unset;
+        }
+    }
+}

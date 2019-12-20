@@ -1,4 +1,4 @@
-export default class BorobudurService {
+export default class RasafaService {
     constructor($auth) {
         this.$auth = $auth
         this._AUTHID = this.getAuthorization()

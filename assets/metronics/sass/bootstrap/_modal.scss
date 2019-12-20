@@ -110,6 +110,7 @@
 .modal-open {
     overflow: auto !important;
     padding: 0 !important;
+    display: block;
 }
 
 .modal-body {
@@ -124,6 +125,19 @@
         padding-top: 0;
         padding-bottom: 0;
     }
+}
+
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    z-index: 1041;
+    width: 500px;
+    /* margin: auto; */
+    position: absolute;
+    top: 40%;
+    left: 35%;
 }
 
 @include kt-media-above(xl) {

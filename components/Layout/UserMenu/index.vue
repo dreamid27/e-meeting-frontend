@@ -5,11 +5,11 @@
     @click="setSelectedMenu('user')"
 >
     <div class="kt-header__topbar-wrapper">
-      <span class="kt-header__topbar-welcome">Hi,</span>
-      <span class="kt-header__topbar-username">Sean</span>
+      <span class="kt-header__topbar-welcome">Assalamualaikum,</span>
+      <span class="kt-header__topbar-username">{{userData.firstName || 'Akhi'}}</span>
 
       <span class="kt-header__topbar-icon">
-        <b>S</b>
+        <b>{{initialName}}</b>
       </span>
       <img alt="Pic" src="~assets/media/users/300_21.jpg" class="kt-hidden" />
     </div>
@@ -26,19 +26,19 @@
         <div class="kt-user-card__avatar">
           <img class="kt-hidden" alt="Pic" src="~assets/media/users/300_25.jpg" />
           <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
-          <span class="kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold kt-font-success">S</span>
+          <span class="kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold kt-font-success">M</span>
         </div>
-        <div class="kt-user-card__name">Sean Stone</div>
+        <div class="kt-user-card__name">{{userData.fullName || 'Akhi'}}</div>
         <div class="kt-user-card__badge">
-          <span class="btn btn-success btn-sm btn-bold btn-font-md">23 messages</span>
+          <span class="btn btn-success btn-sm btn-bold btn-font-md">{{userData.inRelation ? 'Ta\'aruf' : 'Ikthiar'}}</span>
         </div>
       </div>
       <!--end: Head -->
 
       <!--begin: Navigation -->
       <div class="kt-notification">
-        <a
-          href="demo4/custom/apps/user/profile-1/personal-information.html"
+        <nuxt-link
+          to="/profile"
           class="kt-notification__item"
         >
           <div class="kt-notification__item-icon">
@@ -48,7 +48,7 @@
             <div class="kt-notification__item-title kt-font-bold">My Profile</div>
             <div class="kt-notification__item-time">Account settings and more</div>
           </div>
-        </a>
+        </nuxt-link>
         <a href="demo4/custom/apps/user/profile-3.html" class="kt-notification__item">
           <div class="kt-notification__item-icon">
             <i class="flaticon2-mail kt-font-warning"></i>
@@ -58,7 +58,7 @@
             <div class="kt-notification__item-time">Inbox and tasks</div>
           </div>
         </a>
-        <a href="demo4/custom/apps/user/profile-2.html" class="kt-notification__item">
+        <nuxt-link to="/dashboard/taaruf/request" class="kt-notification__item">
           <div class="kt-notification__item-icon">
             <i class="flaticon2-rocket-1 kt-font-danger"></i>
           </div>
@@ -66,34 +66,7 @@
             <div class="kt-notification__item-title kt-font-bold">My Activities</div>
             <div class="kt-notification__item-time">Logs and notifications</div>
           </div>
-        </a>
-        <a href="demo4/custom/apps/user/profile-3.html" class="kt-notification__item">
-          <div class="kt-notification__item-icon">
-            <i class="flaticon2-hourglass kt-font-brand"></i>
-          </div>
-          <div class="kt-notification__item-details">
-            <div class="kt-notification__item-title kt-font-bold">My Tasks</div>
-            <div class="kt-notification__item-time">latest tasks and projects</div>
-          </div>
-        </a>
-
-        <a href="demo4/custom/apps/user/profile-1/overview.html" class="kt-notification__item">
-          <div class="kt-notification__item-icon">
-            <i class="flaticon2-cardiogram kt-font-warning"></i>
-          </div>
-          <div class="kt-notification__item-details">
-            <div class="kt-notification__item-title kt-font-bold">Billing</div>
-            <div class="kt-notification__item-time">
-              billing & statements
-              <span
-                class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill kt-badge--rounded"
-              >
-                2
-                pending
-              </span>
-            </div>
-          </div>
-        </a>
+        </nuxt-link>
         <div class="kt-notification__custom kt-space-between">
           <a
             href="demo4/custom/user/login-v2.html"
@@ -105,7 +78,7 @@
             href="demo4/custom/user/login-v2.html"
             target="_blank"
             class="btn btn-clean btn-sm btn-bold"
-          >Upgrade Plan</a>
+          >@mawaddah_idn</a>
         </div>
       </div>
       <!--end: Navigation -->
@@ -121,6 +94,14 @@ import { mixin as clickaway } from "vue-clickaway";
 export default {
   props: ["isActiveMenu"],
   mixins: [clickaway],
+  computed: {
+    userData() {
+      return this.$store.getters['profile/getProfile'];
+    },
+    initialName() {
+      return this.userData.firstName && this.userData.firstName[0] || 'a';
+    }
+  },
   methods: {
     hideAllActiveMenu() {
       this.$emit("onHideMenu");

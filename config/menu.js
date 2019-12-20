@@ -5,11 +5,11 @@ export var menuList = [
         },
         {
             name: 'Cari Pasangan',
-            slug: '/cari-pasangan'
+            slug: '/dashboard/cari-pasangan'
         },
         {
             name: 'FAQ',
-            slug: '/faq'
+            slug: '/dashboard/faq'
         }
     
     

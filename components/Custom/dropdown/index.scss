@@ -1,0 +1,84 @@
+.mw-dropdown {
+    position: relative;
+    font-size: 1rem;
+    color: #212529;
+
+    &::after {
+        border: 0;
+        margin-right: -2px;
+        font-size: .6rem;
+        display: inline-block;
+        font-family: Flaticon2;
+        font-style: normal;
+        font-weight: 400;
+        font-variant: normal;
+        line-height: 1;
+        text-decoration: inherit;
+        text-rendering: optimizeLegibility;
+        text-transform: none;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        font-smoothing: antialiased;
+        content: "";
+        top: 45%;
+        right: 15px;
+        position: absolute;
+    }
+    
+    &-container {
+        border: 0 !important;
+        margin: 0;
+        border-radius: 0;
+        min-width: 14rem;
+        padding: 0;
+        -webkit-box-shadow: 0px 0px 50px 0px rgba(82, 63, 105, 0.15);
+        box-shadow: 0px 0px 50px 0px rgba(82, 63, 105, 0.15);
+        padding: 1rem 0;
+        border-radius: 4px;
+        left: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: 999;
+        background: #ffffff;
+        width: 100%;
+        margin-top: 2px;
+
+        &__inner {
+            max-height: 219px;
+            overflow-y: auto;
+            min-height: 0px;
+
+            ul {
+                list-style: none;
+                padding-left: 0;
+                margin-bottom: 0;
+
+                li {
+                    position: relative;
+                    a {
+                        padding: 10px 15px;
+                        display: block;
+                        cursor: pointer;
+                    }
+
+                    a:hover {
+                        color: #595d6e;
+                        text-decoration: none;
+                        background-color: #f7f8fa;
+                    }
+                }
+            }
+        }
+
+        &__search {
+            padding: 10px 15px;
+
+            .form-control {
+                margin-bottom: 0;
+                width: 100%;
+                float: none;
+            }
+        }
+    }
+    
+}

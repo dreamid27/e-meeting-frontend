@@ -77,8 +77,7 @@ export default {
   middleware: "auth",
   components: {
     Logo
-  },
-  beforeMount() {}
+  }
 };
 </script>
 <style lang="scss" scoped src="./index.scss" />

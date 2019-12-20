@@ -19,7 +19,8 @@ export default {
     Header,
     Footer,
     SideMenu
-  }
+  },
+  
 }
 </script>
 
