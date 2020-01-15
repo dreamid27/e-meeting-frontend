@@ -34,7 +34,7 @@
                     <div class="form-group row">
                         <label class="col-xl-3 col-lg-3 col-form-label">Hobi</label>
                         <div class="col-lg-9 col-xl-6">
-                            <textarea class="form-control" id="hobi" rows="3" v-model="formData['hoby']" ></textarea>
+                            <textarea class="form-control" id="hobi" rows="3" v-model="formData['hobby']" ></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -71,14 +71,16 @@
             </div>
             <div class="kt-portlet__foot">
                 <div class="kt-form__actions">
-                <div class="row">
-                    <div class="col-lg-3 col-xl-3"></div>
-                    <div class="col-lg-9 col-xl-9">
-                    <button type="submit" class="btn btn-success">Submit</button>&nbsp;
-                    <button type="reset" class="btn btn-secondary">Cancel</button>
-                    <button type="submit" class="btn btn-brand">Selanjutnya</button>
+                    <div class="row">
+                        <div class="col-lg-3 col-xl-3"></div>
+                        <div class="col-lg-9 col-xl-6">
+                            <template v-if="!isContinueSaving">
+                                <button type="submit" class="btn btn-success">Simpan</button>&nbsp;
+                                <a href="/dashboard" class="btn btn-secondary">Kembali Ke Home</a>
+                            </template>
+                            <button type="submit" class="btn btn-brand right"  v-if="isContinueSaving">Selanjutnya</button>
+                        </div>
                     </div>
-                </div>
                 </div>
             </div>
             </form>
@@ -97,10 +99,7 @@ export default {
   props: ['initData', 'initCities', 'initProvince'],
   data() {
     return {
-      formData: {
-        gender: 'ikhwan',
-        manhaj: 'nosalaf'
-      },
+      formData: {},
       bentukFisikList: [{label: 'Sangat Kurus', value: 'Sangat Kurus'},
       {label: 'Kurus', value: 'Kurus'},
       {label: 'Atletis', value: 'Atletis'},
@@ -112,14 +111,20 @@ export default {
     'mw-dropdown': Dropdown,
     'mw-datepicker': DatePicker
   },
+  computed: {
+    isContinueSaving() {
+      return this.$store.getters['profile/isContinueSaving'];
+    }
+  },
   methods: {
     onSave() {
         const tempData = Object.assign({}, this.formData);
         this.$emit('onSave', {data: tempData, section: 'self_image'});
+        if (this.isContinueSaving) this.$router.push({ path: '/profile/data-keluarga', query: { iscontinue: '1' } });
     }
   },
   beforeMount() {
-    this.formData = {...this.formData, ...this.initDatax};
+    this.formData = {...this.formData, ...this.initData};
   }
 };
 </script>

@@ -45,19 +45,22 @@
             <i class="flaticon2-calendar-3 kt-font-success"></i>
           </div>
           <div class="kt-notification__item-details">
-            <div class="kt-notification__item-title kt-font-bold">My Profile</div>
-            <div class="kt-notification__item-time">Account settings and more</div>
+            <div class="kt-notification__item-title kt-font-bold">Profil Saya</div>
+            <div class="kt-notification__item-time">Edit akun, informasi personal</div>
           </div>
         </nuxt-link>
-        <a href="demo4/custom/apps/user/profile-3.html" class="kt-notification__item">
+        <nuxt-link
+          to="/messages"
+          class="kt-notification__item"
+        >
           <div class="kt-notification__item-icon">
             <i class="flaticon2-mail kt-font-warning"></i>
           </div>
           <div class="kt-notification__item-details">
-            <div class="kt-notification__item-title kt-font-bold">My Messages</div>
-            <div class="kt-notification__item-time">Inbox and tasks</div>
+            <div class="kt-notification__item-title kt-font-bold">Pesan</div>
+            <div class="kt-notification__item-time">Kotak Masuk</div>
           </div>
-        </a>
+        </nuxt-link>
         <nuxt-link to="/dashboard/taaruf/request" class="kt-notification__item">
           <div class="kt-notification__item-icon">
             <i class="flaticon2-rocket-1 kt-font-danger"></i>
@@ -69,13 +72,11 @@
         </nuxt-link>
         <div class="kt-notification__custom kt-space-between">
           <a
-            href="demo4/custom/user/login-v2.html"
-            target="_blank"
+            @click="logout()"
             class="btn btn-label btn-label-brand btn-sm btn-bold"
           >Sign Out</a>
-
           <a
-            href="demo4/custom/user/login-v2.html"
+            href="#"
             target="_blank"
             class="btn btn-clean btn-sm btn-bold"
           >@mawaddah_idn</a>
@@ -100,6 +101,9 @@ export default {
     },
     initialName() {
       return this.userData.firstName && this.userData.firstName[0] || 'a';
+    },
+    logout() {
+      this.$auth.logout();
     }
   },
   methods: {

@@ -2,7 +2,9 @@ import ProfileService from '~/service/profileService';
 
 export const state = () => ({
     _dataUser: null,
-    myProfile: null
+    myProfile: null,
+    isContinueSaving: false,
+    section: ''
   })
 
 export const mutations = {
@@ -16,6 +18,12 @@ export const mutations = {
     },
     SET_MY_PROFILE(state, data) {
         state.myProfile = data;
+    },
+    SET_ISCONTINUE_SAVING(state, data) {
+        state.isContinueSaving = data;
+    },
+    SET_SECTION(state, data) {
+        state.section = data;
     }
 }
 
@@ -31,6 +39,20 @@ export const actions = {
         } catch (error) {
             throw new Error(error);
         }
+    },
+    setIsContinueSaving({ commit }, data) {
+        try {
+            commit('SET_ISCONTINUE_SAVING', data);
+        } catch (error) {
+            throw new Error(error);
+        }
+    },
+    setSection({ commit }, data) {
+        try {
+            commit('SET_SECTION', data);
+        } catch (error) {
+            throw new Error(error);
+        }
     }
 }
 
@@ -40,5 +62,11 @@ export const getters = {
     },
     getMyProfile(state) {
         return state.myProfile;
+    },
+    isContinueSaving(state) {
+        return state.isContinueSaving;
+    },
+    getSection(state) {
+        return state.section;
     }
 }

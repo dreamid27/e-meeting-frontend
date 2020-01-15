@@ -15,34 +15,6 @@
               <div class="kt-section kt-section--first">
                 <div class="kt-section__body">
                   <div class="form-group row">
-                    <label class="col-xl-3 col-lg-3 col-form-label">Avatar</label>
-                    <div class="col-lg-9 col-xl-6">
-                      <div class="kt-avatar kt-avatar--outline" id="kt_user_avatar">
-                        <div
-                          class="kt-avatar__holder"
-                          style="background-image: url(&quot;http://keenthemes.com/metronic/preview/default/custom/user/assets/media/users/100_1.jpg&quot;);"
-                        ></div>
-                        <label
-                          class="kt-avatar__upload"
-                          data-toggle="kt-tooltip"
-                          title
-                          data-original-title="Change avatar"
-                        >
-                          <i class="fa fa-pen"></i>
-                          <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg" />
-                        </label>
-                        <span
-                          class="kt-avatar__cancel"
-                          data-toggle="kt-tooltip"
-                          title
-                          data-original-title="Cancel avatar"
-                        >
-                          <i class="fa fa-times"></i>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group row">
                     <label class="col-xl-3 col-lg-3 col-form-label">
                       Nomor KTP
                     </label>
@@ -221,10 +193,12 @@
               <div class="kt-form__actions">
                 <div class="row">
                   <div class="col-lg-3 col-xl-3"></div>
-                  <div class="col-lg-9 col-xl-9">
-                    <button type="submit" class="btn btn-success">Submit</button>&nbsp;
-                    <button type="reset" class="btn btn-secondary">Cancel</button>
-                    <button type="submit" class="btn btn-brand">Selanjutnya</button>
+                  <div class="col-lg-9 col-xl-6">
+                    <template v-if="!isContinueSaving">
+                      <button type="submit" class="btn btn-success">Simpan</button>&nbsp;
+                      <a href="/dashboard" class="btn btn-secondary">Kembali Ke Home</a>
+                    </template>
+                    <button type="submit" class="btn btn-brand right"  v-if="isContinueSaving">Selanjutnya</button>
                   </div>
                 </div>
               </div>
@@ -256,9 +230,19 @@ export default {
     'mw-datepicker': DatePicker
   },
   methods: {
-    onSave() {
-      const profileService = new ProfileService(this.$axios, this.$auth);
-      profileService.updateProfile(this.formData).then(x => console.log(x));
+    async onSave() {
+      try { 
+        const profileService = new ProfileService(this.$axios, this.$auth);
+        await profileService.updateProfile(this.formData);
+        if (this.isContinueSaving) this.$router.push({ path: '/profile/gambaran-fisik', query: { iscontinue: '1' } });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  },
+  computed: {
+    isContinueSaving() {
+      return this.$store.getters['profile/isContinueSaving'];
     }
   },
   beforeMount() {

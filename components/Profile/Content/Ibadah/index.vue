@@ -1,18 +1,12 @@
 <template>
   <div class="row">
     <div class="col-xl-12">
-      <div class="kt-portlet">
-        <div class="kt-portlet__head">
-          <div class="kt-portlet__head-label">
-            <h3 class="kt-portlet__head-title">
-              Ibadah
-              <small>Silahkan Isi dengan baik dan jujur, Allah maha melihat</small>
-            </h3>
-          </div>
-        </div>
-        <form class="kt-form kt-form--label-right form-family" @submit.prevent="onSave">
-          <div class="form-group row">
-            <div class="col">
+      <mw-portlet isContinueSaving="isContinueSaving">
+        <template v-slot:title>Ibadah</template>
+
+        <template v-slot:form>
+          <mw-form @onTogglePopup="togglePopup" @onSubmit="onSave" :isActive="isActivePopup">
+             <div class="col">
               <label>Jenis Ibadah</label>
               <mw-dropdown
                 :searchBarActive="false"
@@ -31,12 +25,20 @@
                 v-model="formAdd['description']"
               ></textarea>
             </div>
-          </div>
-          <div class="kt-form__action">
-            <button type="submit" class="btn btn-sm btn-success">Submit</button>&nbsp;
-          </div>
-        </form>
-        <div class="kt-portlet__body">
+          </mw-form>
+        </template>
+
+        <template v-slot:body>
+         <transition name="page">
+            <button
+              type="button"
+              @click="togglePopup()"
+              class="btn btn-brand btn-elevate btn-circle btn-icon btn-floating"
+              v-show="!isActivePopup"
+            >
+              <span class="flaticon2-plus"></span>
+            </button>
+          </transition>
           <div class="kt-section__body">
             <div class="kt-widget31">
               <div class="kt-widget31__item" v-for="(obj, idx) in formData" :key="idx">
@@ -49,8 +51,8 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </template>
+      </mw-portlet>
     </div>
   </div>
 </template>
@@ -60,6 +62,8 @@ import DashboardService from "~/service/dashboardService.js";
 import ProfileService from "~/service/profileService";
 import Dropdown from "~/components/Custom/dropdown";
 import DatePicker from "~/components/Custom/datepicker";
+import Portlet from "~/components/Profile/Portlet";
+import Form from "~/components/Profile/Form";
 
 export default {
   props: ["initData", "initCities", "initProvince"],
@@ -81,12 +85,15 @@ export default {
           label: "Bolehkah melakukan demonstrasi?",
           value: "Bolehkah melakukan demonstrasi?"
         }
-      ]
+      ],
+      isActivePopup: false
     };
   },
   components: {
     "mw-dropdown": Dropdown,
-    "mw-datepicker": DatePicker
+    "mw-datepicker": DatePicker,
+    "mw-form": Form,
+    "mw-portlet": Portlet
   },
   methods: {
     onSave() {
@@ -98,6 +105,9 @@ export default {
     },
     clearInput() {
       this.formAdd = {};
+    },
+    togglePopup() {
+      this.isActivePopup = this.isActivePopup != true;
     }
   },
   beforeMount() {

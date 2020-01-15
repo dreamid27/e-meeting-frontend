@@ -5,8 +5,8 @@
     <mw-gambaran-diri v-if="activeSection === 'gambaran-diri'" :initData="initData['self_image']" @onSave="onSave" />
     <mw-data-keluarga v-if="activeSection === 'data-keluarga'" :initData="initData['families']" @onSave="onSave" />
     <mw-pendidikan v-if="activeSection === 'pendidikan'" :initData="initData['educations']" @onSave="onSave" />
-    <mw-pengalaman v-if="activeSection === 'pengalaman'" :initData="initData" @onSave="onSave" />
-    <mw-ibadah v-if="activeSection === 'ibadah'" :initData="initData" @onSave="onSave" />
+    <mw-pengalaman v-if="activeSection === 'pengalaman'" :initData="initData['experiences']" @onSave="onSave" />
+    <mw-ibadah v-if="activeSection === 'ibadah'" :initData="initData['prays']" @onSave="onSave" />
   </div>
 </template>
 
@@ -35,9 +35,8 @@ export default {
   methods: {
     onSave(obj) {   
       const tempData = Object.assign({}, this.initData);
-      if (obj.section) tempData[obj.section] = Object.assign({}, obj.data);
+      if (obj.section)  tempData[obj.section] = obj.data;
       else tempData = Object.assign({}, obj.data);
-      console.log(tempData,'tempdata');
       this.$store.dispatch('profile/setMyProfile', tempData);
     }
   }

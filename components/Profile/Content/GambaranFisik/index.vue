@@ -23,28 +23,28 @@
                     <div class="form-group row">
                         <label class="col-xl-3 col-lg-3 col-form-label">Warna Kulit</label>
                         <div class="col-lg-9 col-xl-6">
-                            <mw-dropdown :searchBarActive="false" :placeholder="'Pilih Warna Kulit'" :initData="bentukFisikList" v-model="formData['skin_color']" />
+                            <mw-dropdown :searchBarActive="false" :placeholder="'Pilih Warna Kulit'" :initData="skinColorList" v-model="formData['skin_color']" />
                         <!-- <input class="form-control" type="text" v-model="formData['place_of_birth']" id="place_of_birth"/> -->
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-xl-3 col-lg-3 col-form-label">Warna Mata</label>
                         <div class="col-lg-9 col-xl-6">
-                            <mw-dropdown :searchBarActive="false" :placeholder="'Pilih Warna Mata'" :initData="bentukFisikList" v-model="formData['eye_color']" />
+                            <mw-dropdown :searchBarActive="false" :placeholder="'Pilih Warna Mata'" :initData="colorEyeList" v-model="formData['eye_color']" />
                         <!-- <input class="form-control" type="text" v-model="formData['place_of_birth']" id="place_of_birth"/> -->
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-xl-3 col-lg-3 col-form-label">Warna Rambut</label>
                         <div class="col-lg-9 col-xl-6">
-                            <mw-dropdown :searchBarActive="false" :placeholder="'Pilih Warna Rambut'" :initData="bentukFisikList" v-model="formData['hair_color']" />
+                            <mw-dropdown :searchBarActive="false" :placeholder="'Pilih Warna Rambut'" :initData="colorHairList" v-model="formData['hair_color']" />
                         <!-- <input class="form-control" type="text" v-model="formData['place_of_birth']" id="place_of_birth"/> -->
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-xl-3 col-lg-3 col-form-label">Tipe Rambut</label>
                         <div class="col-lg-9 col-xl-6">
-                            <mw-dropdown :searchBarActive="false" :placeholder="'Pilih Tipe Rambut'" :initData="bentukFisikList" v-model="formData['hair_type']" />
+                            <mw-dropdown :searchBarActive="false" :placeholder="'Pilih Tipe Rambut'" :initData="typeHairList" v-model="formData['hair_type']" />
                         <!-- <input class="form-control" type="text" v-model="formData['place_of_birth']" id="place_of_birth"/> -->
                         </div>
                     </div>
@@ -103,10 +103,12 @@
                 <div class="kt-form__actions">
                 <div class="row">
                     <div class="col-lg-3 col-xl-3"></div>
-                    <div class="col-lg-9 col-xl-9">
-                    <button type="submit" class="btn btn-success">Submit</button>&nbsp;
-                    <button type="reset" class="btn btn-secondary">Cancel</button>
-                    <button type="submit" class="btn btn-brand">Selanjutnya</button>
+                    <div class="col-lg-9 col-xl-6">
+                    <template v-if="!isContinueSaving">
+                      <button type="submit" class="btn btn-success">Simpan</button>&nbsp;
+                      <a href="/dashboard" class="btn btn-secondary">Kembali Ke Home</a>
+                    </template>
+                    <button type="submit" class="btn btn-brand right"  v-if="isContinueSaving">Selanjutnya</button>
                     </div>
                 </div>
                 </div>
@@ -124,28 +126,54 @@ import Dropdown from '~/components/Custom/dropdown';
 import DatePicker from '~/components/Custom/datepicker';
 
 export default {
-  props: ['initData', 'initCities', 'initProvince'],
+  props: ['initData'],
   data() {
     return {
-      formData: {
-        gender: 'ikhwan',
-        manhaj: 'nosalaf'
-      },
+        formData: {},
       bentukFisikList: [{label: 'Sangat Kurus', value: 'Sangat Kurus'},
       {label: 'Kurus', value: 'Kurus'},
       {label: 'Atletis', value: 'Atletis'},
       {label: 'Normal', value: 'Normal'},
-      {label: 'Chubby', value: 'Chubby'}]
+      {label: 'Chubby', value: 'Chubby'}],
+      skinColorList: [
+          {label: 'Putih', value: 'Putih'},
+          {label: 'Putih Kemerahan', value: 'Putih Kemerahan'},
+          {label: 'Putih Kekuningan', value: 'Putih Kekuningan'},
+          {label: 'Putih Kecoklatan', value: 'Putih Kecoklatan'},
+          {label: 'Coklat Sawo Matang', value: 'Coklat Sawo Matang'},
+          {label: 'Coklat Kehitaman', value: 'Coklat Kehitaman'},
+          {label: 'Hitam', value: 'Hitam'}],
+      typeHairList: [
+          {label: 'Lurus', value: 'Lurus'},
+          {label: 'Ikal', value: 'Ikal'},
+          {label: 'Keriting', value: 'Keriting'},
+          {label: 'Keriting Kribo', value: 'Keriting Kribo'}],
+      colorHairList: [
+          {label: 'Coklat', value: 'Coklat'},
+          {label: 'Hitam', value: 'Hitam'},
+          {label: 'Merah', value: 'Merah'},
+          {label: 'Pirang', value: 'Pirang'}],
+      colorEyeList: [
+          {label: 'Hitam', value: 'Hitam'},
+          {label: 'Biru', value: 'Biru'},
+          {label: 'Coklat', value: 'Coklat'},
+          {label: 'Hijau', value: 'Hijau'}]
     };
   },
   components: {
     'mw-dropdown': Dropdown,
     'mw-datepicker': DatePicker
   },
+  computed: {
+    isContinueSaving() {
+      return this.$store.getters['profile/isContinueSaving'];
+    }
+  },
   methods: {
     onSave() {
         const tempData = Object.assign({}, this.formData);
         this.$emit('onSave', {data: tempData, section: 'physical_image'});
+        if (this.isContinueSaving) this.$router.push({ path: '/profile/gambaran-diri', query: { iscontinue: '1' } });
     }
   },
   beforeMount() {

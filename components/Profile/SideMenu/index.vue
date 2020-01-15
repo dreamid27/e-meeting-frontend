@@ -7,97 +7,6 @@
         <div class="kt-portlet__head-label">
           <h3 class="kt-portlet__head-title"></h3>
         </div>
-        <div class="kt-portlet__head-toolbar">
-          <a href="#" class="btn btn-clean btn-sm btn-icon btn-icon-md" data-toggle="dropdown">
-            <i class="flaticon-more-1"></i>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-menu-md">
-            <!--begin::Nav-->
-            <ul class="kt-nav">
-              <li class="kt-nav__head">
-                Export Options
-                <span
-                  data-toggle="kt-tooltip"
-                  data-placement="right"
-                  title="Click to learn more..."
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    width="24px"
-                    height="24px"
-                    viewBox="0 0 24 24"
-                    version="1.1"
-                    class="kt-svg-icon kt-svg-icon--brand kt-svg-icon--md1"
-                  >
-                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                      <rect id="bound" x="0" y="0" width="24" height="24" />
-                      <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-                      <rect
-                        id="Rectangle-9"
-                        fill="#000000"
-                        x="11"
-                        y="10"
-                        width="2"
-                        height="7"
-                        rx="1"
-                      />
-                      <rect
-                        id="Rectangle-9-Copy"
-                        fill="#000000"
-                        x="11"
-                        y="7"
-                        width="2"
-                        height="2"
-                        rx="1"
-                      />
-                    </g>
-                  </svg>
-                </span>
-              </li>
-              <li class="kt-nav__separator"></li>
-              <li class="kt-nav__item">
-                <a href="#" class="kt-nav__link">
-                  <i class="kt-nav__link-icon flaticon2-drop"></i>
-                  <span class="kt-nav__link-text">Activity</span>
-                </a>
-              </li>
-              <li class="kt-nav__item">
-                <a href="#" class="kt-nav__link">
-                  <i class="kt-nav__link-icon flaticon2-calendar-8"></i>
-                  <span class="kt-nav__link-text">FAQ</span>
-                </a>
-              </li>
-              <li class="kt-nav__item">
-                <a href="#" class="kt-nav__link">
-                  <i class="kt-nav__link-icon flaticon2-telegram-logo"></i>
-                  <span class="kt-nav__link-text">Settings</span>
-                </a>
-              </li>
-              <li class="kt-nav__item">
-                <a href="#" class="kt-nav__link">
-                  <i class="kt-nav__link-icon flaticon2-new-email"></i>
-                  <span class="kt-nav__link-text">Support</span>
-                  <span class="kt-nav__link-badge">
-                    <span class="kt-badge kt-badge--success kt-badge--rounded">5</span>
-                  </span>
-                </a>
-              </li>
-              <li class="kt-nav__separator"></li>
-              <li class="kt-nav__foot">
-                <a class="btn btn-label-danger btn-bold btn-sm" href="#">Upgrade plan</a>
-                <a
-                  class="btn btn-clean btn-bold btn-sm"
-                  href="#"
-                  data-toggle="kt-tooltip"
-                  data-placement="right"
-                  title="Click to learn more..."
-                >Learn more</a>
-              </li>
-            </ul>
-            <!--end::Nav-->
-          </div>
-        </div>
       </div>
       <div class="kt-portlet__body kt-portlet__body--fit-y">
         <!--begin::Widget -->
@@ -108,16 +17,14 @@
             </div>
             <div class="kt-widget__content">
               <div class="kt-widget__section">
-                <a href="#" class="kt-widget__username">
-                  Jason Muller
-                  <i class="flaticon2-correct kt-font-success"></i>
-                </a>
-                <span class="kt-widget__subtitle">Head of Development</span>
+                <div class="kt-widget__username">
+                  {{profileData && profileData.first_name || 'Akhi'}}
+                </div>
+                <span class="kt-widget__subtitle">{{profileData && profileData.manhaj == 'salaf' ? 'Sudah Mengenal Salaf' : profileData && profileData.manhaj == 'unsalaf' ? 'Baru Mengenal Salaf' : 'Bukan Salaf' }}</span>
               </div>
 
               <div class="kt-widget__action">
-                <button type="button" class="btn btn-info btn-sm">chat</button>&nbsp;
-                <button type="button" class="btn btn-success btn-sm">follow</button>
+                <button type="button" class="btn btn-info btn-sm">{{profileData && profileData.in_relation == 1  ? 'Sedang Ta\'aruf' : 'Masih Ikthiar'}}</button>
               </div>
             </div>
           </div>
@@ -125,15 +32,21 @@
             <div class="kt-widget__content">
               <div class="kt-widget__info">
                 <span class="kt-widget__label">Email:</span>
-                <a href="#" class="kt-widget__data">matt@fifestudios.com</a>
+                <div>
+                  <span class="kt-widget__data">muh.alfaris@gmail.com</span>
+                  <i class="flaticon2-correct kt-font-success"></i>
+                </div>
               </div>
               <div class="kt-widget__info">
-                <span class="kt-widget__label">Phone:</span>
-                <a href="#" class="kt-widget__data">44(76)34254578</a>
+                <span class="kt-widget__label">No Hp:</span>
+                <div>
+                  <span class="kt-widget__data">+62 81910373275</span>
+                  <i class="flaticon2-correct kt-font-success"></i>
+                </div>
               </div>
               <div class="kt-widget__info">
-                <span class="kt-widget__label">Location:</span>
-                <span class="kt-widget__data">Melbourne</span>
+                <span class="kt-widget__label">Domisili:</span>
+                <span class="kt-widget__data">{{profileData && profileData.domisili_city }}</span>
               </div>
             </div>
             <div class="kt-widget__items">
@@ -195,7 +108,13 @@ export default {
   props: ['activeMenu'],
   data() {
     return {
-      profileMenus: [{ 
+      profileMenus: [
+        { 
+          name: 'Overview',
+          url: '/profile',
+          icon: 'flaticon2-user'
+        },
+        { 
         name: 'Informasi Personal',
         url: '/profile/informasi-personal',
         icon: 'flaticon2-user'
@@ -232,6 +151,11 @@ export default {
       }]
     }
   },
+  computed: {
+    profileData() {
+      return this.$store.getters['profile/getMyProfile'];
+    }
+  }
 };
 </script>
 <style lang="scss" scoped src="./index.scss" />

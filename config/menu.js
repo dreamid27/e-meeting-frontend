@@ -8,9 +8,11 @@ export var menuList = [
             slug: '/dashboard/cari-pasangan'
         },
         {
+            name: 'Ta\'aruf',
+            slug: '/dashboard/taaruf'
+        },
+        {
             name: 'FAQ',
             slug: '/dashboard/faq'
-        }
-    
-    
+        },
 ]

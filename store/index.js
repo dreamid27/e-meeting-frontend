@@ -1,8 +1,11 @@
 import ProfileService from '~/service/profileService';
 
+export const state = () => ({
+  isLoading: false
+})
+
 export const mutations = {
   SET_LOADING(state, data) {
-      console.log('loading', data)
       state.isLoading = data;
   }
 }
