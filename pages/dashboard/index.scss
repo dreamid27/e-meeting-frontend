@@ -1,0 +1,17 @@
+@import '~/assets/scss/_variable';
+.dashboard {
+    position: relative;
+    .dashboard__container {
+
+    }
+
+    .background-abs {
+        background: $main-color;
+        position: absolute;
+        z-index: -1;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 50px;
+    }
+}

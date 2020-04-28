@@ -28,7 +28,6 @@ export default {
   ** Global CSS
   */
   css: [
-    {src: "~/assets/scss/main.scss", lang: 'sass'}
   ],
   /*
   ** Plugins to load before mounting the App
@@ -49,8 +48,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    'bootstrap-vue/nuxt' ,
-    '@nuxtjs/auth',   
+    '@nuxtjs/auth'
   ],
   
   /*
@@ -58,10 +56,6 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-  },
-  bootstrapVue: {
-    bootstrapCSS: false, // Or `css: false`
-    bootstrapVueCSS: false // Or `bvCSS: false`
   },
   /*
   ** Build configuration

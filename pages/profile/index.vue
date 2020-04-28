@@ -1,5 +1,9 @@
 <template>
-  <div class="kt-grid__item kt-grid__item--fluid kt-app__content">
+  <div class="wrapper">
+  </div>
+
+
+  <!-- <div class="kt-grid__item kt-grid__item--fluid kt-app__content">
     <div class="row">
       <div class="col-xl-12">
         <mw-portlet isContinueSaving="isContinueSaving">
@@ -61,7 +65,7 @@
         </mw-portlet>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -75,7 +79,7 @@ import province from "~/assets/data/province.json";
 import Portlet from "~/components/Profile/Portlet";
 
 export default {
-  layout: "profile",
+  layout: "dashboard",
   middleware: "auth",
   components: {
     "profile-sidemenu": SideMenu,

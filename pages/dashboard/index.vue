@@ -1,82 +1,39 @@
 <template>
-  <div
-    class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"
-    id="kt_content"
-  >
-    <!-- begin:: Subheader -->
-    <div class="kt-subheader kt-grid__item" id="kt_subheader">
-      <div class="kt-container">
-        <div class="kt-subheader__main">
-          <h3 class="kt-subheader__title">Dashboard</h3>
-
-          <div class="kt-subheader__breadcrumbs">
-            <a href="#" class="kt-subheader__breadcrumbs-home">
-              <i class="flaticon2-shelter"></i>
-            </a>
-            <span class="kt-subheader__breadcrumbs-separator"></span>
-            <a href class="kt-subheader__breadcrumbs-link">Dashboard</a>
-            <span class="kt-subheader__breadcrumbs-separator"></span>
-            <a href class="kt-subheader__breadcrumbs-link">Default Dashboard</a>
-          </div>
-        </div>
-        <div class="kt-subheader__toolbar">
-          <div class="kt-subheader__wrapper">
-            <a href="#" class="btn kt-subheader__btn-secondary">Reports</a>
-
-            <div
-              class="dropdown dropdown-inline"
-              data-toggle="kt-tooltip"
-              title="Quick actions"
-              data-placement="top"
-            >
-              <a
-                href="#"
-                class="btn btn-danger kt-subheader__btn-options"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >Products</a>
-              <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="#">
-                  <i class="la la-plus"></i> New
-                  Product
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="la la-user"></i> New
-                  Order
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="la la-cloud-download"></i>
-                  New Download
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
-                  <i class="la la-cog"></i> Settings
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div class="dashboard">
+    <div class="background-abs">
+    </div>
+    <div class="dashboard__container wrapper">
+      <div class="menu-container">
+          <menu-card v-for="(obj,idx) in menuList" :key="idx" :initData="obj" />
       </div>
     </div>
-    <!-- end:: Subheader -->
-
-    <!-- begin:: Content -->
-    <div class="kt-container kt-grid__item kt-grid__item--fluid">
-    </div>
-    <!-- end:: Content -->
   </div>
 </template>
 
 <script>
 import Logo from "~/components/Logo.vue";
 import DashboardService from "~/service/dashboardService.js";
+import MenuCard from '~/components/Custom/MenuCard';
 
 export default {
   layout: "dashboard",
   middleware: "auth",
   components: {
-    Logo
+    Logo,
+    MenuCard
+  },
+  data() {
+    return {
+      menuList: [ 
+        {image: 'send.png', desc: 'Lorem ipsum harem mesum',title: 'Pengajuan CV', link: 'dashboard/cari-pasangan'}, 
+        {image: 'send.png', desc: 'Lorem ipsum harem mesum', title: 'Menerima CV', link: 'send-cv'}, 
+        {image: 'send.png', desc: 'Lorem ipsum harem mesum', title: 'Kelas Pra Nikah', link: 'send-cv'}]
+    }
+  },
+  methods: {
+    // navigateMenu(menuLink) {
+    //   this.$route.push(menuLink);
+    // }
   }
 };
 </script>

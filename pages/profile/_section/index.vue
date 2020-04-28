@@ -14,7 +14,7 @@ import province from '~/assets/data/province.json';
 import Loading from "~/components/Loading";
 
 export default {
-  layout: "profile",
+  layout: "dashboard",
   middleware: "auth",
   components: {
     "profile-sidemenu": SideMenu,

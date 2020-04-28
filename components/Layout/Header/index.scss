@@ -1,0 +1,31 @@
+@import '~/assets/scss/_variable';
+header {
+    background: $main-color;
+    height: 65px;
+    color: $white-color;
+
+    .wrapper {
+        float: left;
+        height: 100%;
+        padding-top: 15px;
+    }
+
+    .left__section {
+        float: left;
+
+        .profile-action {
+            width: 24px;
+            overflow: hidden;
+            display: block;
+
+            img {
+                width: 100%;
+                overflow: hidden;
+            }
+        }
+    }
+
+    .right__section {
+        float: right;
+    }
+}

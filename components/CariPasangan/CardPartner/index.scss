@@ -1,7 +1,32 @@
-.kt-widget__footer {
-    margin: -15px;
-}
+@import '~/assets/scss/_variable';
+.card-partner {
+    height: 200px;
+    width: 100%;
+    background: lightgrey;
+    border-radius: 4px;
 
-.mb-6 {
-    margin-bottom: 6px;
+    &__container {
+        position: relative;
+        height: 100%;
+    }
+
+    &__desc {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        padding: 14px;
+        font-size: 11px;
+        color: $white-color;
+        letter-spacing: 0.3px;
+        line-height: 12px;
+
+        div {
+            padding-bottom: 4px;
+        }
+
+        &-domisili {
+            font-size: 10px;
+        }
+    }
 }

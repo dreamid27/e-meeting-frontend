@@ -1,109 +1,70 @@
-@import "../metronics/sass/theme/demos/demo4/style";
-@import "./fonts";
 
-.big-wrapper {
-  margin: 20px auto 150px;
-  width: 1190px;
-}
+@import "./_variable";
+@import "~@getbase/base/scss/index";
+@import "~@getbase/containers/scss/index";
+@import "~@getbase/buttons/scss/index";
+@import "~@getbase/forms/scss/index";
 
-.right {
-  float: right;
-}
-
-@media only screen and (max-width: 1024px) {
-  .big-wrapper {
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     width: 100%;
-  }
 }
 
-.page-enter-active {
-  transition-property: transform,opacity;
-  transition-duration: 0.3s,0.2s;
-  transition-timing-function: ease-in-out, ease-in-out;
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px;
 }
 
-.page-leave-active {
-  transition-property: transform,opacity;
-  transition-duration: 0.3s,0.2s;
-  transition-timing-function: ease-in-out, ease-in-out;
+body {
+    background: $background-color;
+    font-family: 'Arial';
 }
 
-.page-enter,
-.page-leave-active {
-  opacity: 0;
-  transform: translateX(50px);
+.button {
+    border-radius: 4px;
+    text-align: center;
+
+    &.button-sm {
+        padding: 8px 14px;
+    }
+
+    &:hover {
+        border: solid 1px $main-hover-color;
+    }
 }
 
-
-//Slide Vertical
-.slide-vertical-enter-active {
-  transition-property: transform,opacity;
-  transition-duration: 0.3s,0.2s;
-  transition-timing-function: ease-in-out, ease-in-out;
+.button-rounded {
+    padding: 6px 12px;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    background: gray;
+    border-radius: 19px;
+    min-width: 100px;
+    display: inline-block;
+    font-size: 12px;
 }
 
-.slide-vertical-leave-active {
-  transition-property: transform,opacity;
-  transition-duration: 0.3s,0.2s;
-  transition-timing-function: ease-in-out, ease-in-out;
+.wrapper {
+    width: 100%;
+    padding: 10px;
 }
 
-.slide-vertical-enter,
-.slide-vertical-leave-active {
-  opacity: 0;
-  transform: translateY(-50px);
+h1 {
+    margin: 0px;
+    font-size: 1.5em;
 }
 
-//Slide Vertical Reverse
-.slide-vertical-reverse-enter-active {
-  transition-property: transform,opacity;
-  transition-duration: 0.3s,0.2s;
-  transition-timing-function: ease-in-out, ease-in-out;
+h2 {
+    font-size: 1em;
 }
 
-.slide-vertical-reverse-leave-active {
-  transition-property: transform,opacity;
-  transition-duration: 0.3s,0.2s;
-  transition-timing-function: ease-in-out, ease-in-out;
+[type="text"]:focus, [type="email"]:focus, [type="password"]:focus, [type="tel"]:focus, [type="number"]:focus, [type="date"]:focus, [type="search"]:focus {
+  background: transparent;
 }
 
-.slide-vertical-reverse-enter,
-.slide-vertical-reverse-leave-active {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.btn-floating {
-  position: absolute;
-  right: 20px;
-  top: -20px;
-  z-index: 99;
-
-  &.center {
-      right: 45%;
-  }
-
-  &.center-bottom {
-      top: unset;
-      right: 45%;
-      bottom: -20px;
-  }
-
-  &.sign-un {
-      span {
-          animation-name: unlimited-sign;
-          animation-duration:  1.8s;
-          animation-iteration-count: infinite;
-          animation-timing-function: ease-in-out;
-      }
-  }  
-}
-
-@keyframes unlimited-sign {
-  0%   {transform: translateY(0px);}
-  25%  {transform: translateY(-3px);}
-  50%  {transform: translateY(0px);}
-  75%  {transform: translateY(-3px);}
-  100% {transform: translateY(0px);}
-}
 

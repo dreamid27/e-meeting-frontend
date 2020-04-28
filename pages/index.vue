@@ -12,7 +12,7 @@
 
     <div class="row mt-5 justify-content-center">
       <div class="col-8">
-        <img alt="image" class="img-fluid" src="~/assets/imgs/draws/product-tour.svg">
+        <!-- <img alt="image" class="img-fluid" src="~/assets/imgs/draws/product-tour.svg"> -->
       </div>
     </div>
   </div>

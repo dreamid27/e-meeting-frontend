@@ -1,5 +1,27 @@
 <template>
-  <div
+  <div class="search-partner wrapper">
+    <div class="search-partner__container">
+      <div class="search-partner__desc">
+        <h2>Pilih Akhwat untuk mengajukan CV</h2>
+      </div>
+      <div class="search-partner__filter">
+        <div class="search-parter__filter-container">
+          <a href="#" class="button-rounded action">
+            Filter
+          </a>
+           <a href="#" class="button-rounded action">
+              Favorit
+            </a>
+        </div>
+      </div>
+      <div class="search-partner__list-container">
+        <div class="search-partner__item" v-for="(obj, index) in tempData" :key="index">
+            <mw-cardpartner :initData="obj" @onClickRequest="requestTaaruf" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div
     class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"
     id="kt_content"
   >
@@ -12,6 +34,7 @@
             <a href="#" class="kt-subheader__breadcrumbs-home">
               <i class="flaticon2-shelter"></i>
             </a>
+            
             <span class="kt-subheader__breadcrumbs-separator"></span>
             <a href class="kt-subheader__breadcrumbs-link">Dashboard</a>
             <span class="kt-subheader__breadcrumbs-separator"></span>
@@ -23,14 +46,12 @@
     <div class="kt-container kt-grid__item kt-grid__item--fluid">
       <div class="row">
         <div class="col-xl-3" v-for="(obj, index) in tempData" :key="index">
-          <!--Begin::Portlet-->
           <mw-cardpartner :initData="obj" @onClickRequest="requestTaaruf" />
-          <!--End::Portlet-->
         </div>
       </div>
       <mw-confirmation v-show="isShowModalConfirmation" @onSubmit="confirmRequestTaaruf" @onClose="closeModalConfirmation" :initData="dataModal" />
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>

@@ -1,0 +1,18 @@
+.search-partner {
+
+    &__list-container {
+        margin-left: -10px;
+        margin-right: -10px;
+        padding: 0px 5px;
+    }
+    &__item {
+        width: 50%;
+        max-width: 150px;
+        display: inline-block;
+        padding: 5px 5px;
+    }
+
+    &__filter {
+        margin-bottom: 20px;
+    }
+}
