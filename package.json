@@ -24,7 +24,7 @@
     "@nuxtjs/auth": "^4.8.4",
     "@nuxtjs/axios": "^5.6.0",
     "cities.json": "^1.1.5",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "nuxt": "^2.0.0",
     "vue-clickaway": "^2.2.2",
